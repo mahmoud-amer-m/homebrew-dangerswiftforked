@@ -23,15 +23,15 @@ version:
 deploy_tap:
 	Scripts/create_homebrew_tap.sh
 
+build:
+	swift package clean
+	swift build --disable-sandbox -c release
+	
 install: build
 	mkdir -p $(PREFIX)/bin
 	mkdir -p $(LIB_INSTALL_PATH)
 	cp -f $(BUILD_PATH) $(INSTALL_PATH)
 	cp -fr $(SWIFT_LIB_FILES) $(LIB_INSTALL_PATH)
-
-build:
-	swift package clean
-	swift build --disable-sandbox -c release
 
 uninstall:
 	rm -f $(INSTALL_PATH)
